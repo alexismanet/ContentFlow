@@ -109,11 +109,21 @@ var ContentFlowGlobal = {
     },
 
     init: function () {
+
         /* add default stylesheets */
         this.addStylesheet(this.CSSBaseDir+'contentflow.css');
-        this.addStylesheet(this.CSSBaseDir+'mycontentflow.css');    // FF2: without adding a css-file FF2 hangs on a reload.
-                                                                    //      I don't have the slidest idea why
-                                                                    //      Could be timing problem
+
+        if (this.scriptElement.getAttribute('data-cfCss')) {
+            var cfCss = this.scriptElement.getAttribute('data-cfCss');
+            console.log("cfCss", cfCss);
+
+            // 'mycontentflow.css'
+            this.addStylesheet(this.CSSBaseDir+cfCss);    // FF2: without adding a css-file FF2 hangs on a reload.
+                                                                        //      I don't have the slidest idea why
+                                                                        //      Could be timing problem
+        }
+
+
         this.loadAddOns = new Array();
         /* add AddOns scripts */
         if (this.scriptElement.getAttribute('load')) {
