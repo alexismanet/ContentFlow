@@ -9,9 +9,20 @@
 new ContentFlowAddOn ('slideshow', {
 
     conf: {
+
+        labelMap : {
+            'play' : 'play',
+            'next' : 'next',
+            'previous' : 'previous',
+            'pause' : 'pause',
+            'faster' : 'faster',
+            'slower' : 'slower'
+        },
         showControlls: true,
         duration: 2000,
         startOnLoad: false
+
+
     },
 
     init: function() {
@@ -70,7 +81,7 @@ new ContentFlowAddOn ('slideshow', {
                     if (p) {
                         p.removeClassName('play');
                         p.addClassName('pause');
-                        p.setAttribute('title', "pause");
+                        p.setAttribute('title',  labelMap.pause);
                     }
                     this._slideshow_locked = false;
                     this._startSlideshow();
@@ -80,7 +91,7 @@ new ContentFlowAddOn ('slideshow', {
                     if (p) {
                         p.removeClassName('pause');
                         p.addClassName('play');
-                        p.setAttribute('title', "play");
+                        p.setAttribute('title', labelMap.play);
                     }
                     this._slideshow_locked = true;
                     this._stopSlideshow();
@@ -90,6 +101,12 @@ new ContentFlowAddOn ('slideshow', {
 
         /* add spacebar key event */
         flow.conf.keys[32] = function () { this.toggleSlideshow() };
+
+
+
+        var labelMap = flow.conf.labelMap;
+
+
 
         /* add controll elements */
         if (c) {
@@ -101,24 +118,24 @@ new ContentFlowAddOn ('slideshow', {
             var ff = document.createElement('div');
             $CF(ff).addClassName('button');
             ff.addClassName('ff');
-            ff.setAttribute('title', "faster");
+            ff.setAttribute('title', labelMap.faster);
             ff.addEvent('click', function (e) { Event.stop(e); flow._setSlideshowSpeed(flow._slideshow_duration*0.5);}, '');
 
             var slow = document.createElement('div');
             $CF(slow).addClassName('button');
             slow.addClassName('slow');
-            slow.setAttribute('title', "slower");
+            slow.setAttribute('title', labelMap.slower);
             slow.addEvent('click', function (e) { Event.stop(e); flow._setSlideshowSpeed(flow._slideshow_duration*2);}, '');
 
             var pre = document.createElement('div');
             $CF(pre).addClassName('button');
             pre.addClassName('preButton');
-            pre.setAttribute('title', "previouse");
+            pre.setAttribute('title', labelMap.previous);
 
             var next = document.createElement('div');
             $CF(next).addClassName('button');
             next.addClassName('nextButton');
-            next.setAttribute('title', "next");
+            next.setAttribute('title', labelMap.next);
 
             c.appendChild(pre);
             c.appendChild(slow);
