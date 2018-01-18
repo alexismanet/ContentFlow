@@ -33,6 +33,7 @@ new ContentFlowAddOn ('slideshow', {
     onloadInit: function (flow) {
         this._slideshow_timer = null;
         var conf = flow.getAddOnConf('slideshow');
+        var labelMap = conf.labelMap;
 
         /* run slideshow */
         flow._startSlideshow = function () {
@@ -104,7 +105,7 @@ new ContentFlowAddOn ('slideshow', {
 
 
 
-        var labelMap = flow.conf.labelMap;
+
 
 
 
